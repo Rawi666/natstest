@@ -5,7 +5,8 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.2.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
+		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>net.pusz.natstest</groupId>
 	<artifactId>natstest</artifactId>
@@ -18,6 +19,12 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -53,7 +60,47 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
 		</plugins>
+
+		<pluginManagement>
+
+			<plugins>
+
+				<!--
+                    Checking for Violations as Part of the Build
+                    https://maven.apache.org/plugins/maven-checkstyle-plugin/usage.html
+                -->
+				<!-- <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>3.1.0</version>
+					<configuration>
+						<configLocation>sun_checks.xml</configLocation> -->
+				<!-- There are two pre-build styles delivered with plugin, where the first one is default
+                            and does not need to be declared implicitly.
+                            <configLocation>sun_checks.xml</configLocation>
+                            <configLocation>google_checks.xml</configLocation>
+                        -->
+				<!-- <encoding>UTF-8</encoding>
+						<consoleOutput>true</consoleOutput>
+						<failsOnError>true</failsOnError>
+					</configuration>
+					<executions>
+						<execution>
+							<id>validate</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin> -->
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
