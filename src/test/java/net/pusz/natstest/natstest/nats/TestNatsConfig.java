@@ -6,18 +6,18 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 
 import io.nats.client.Connection;
-import net.pusz.natstest.natstest.nats.mocks.MockNatsConnection;
+import net.pusz.natstest.natstest.nats.mocks.InMemoryNatsConnection;
 
 @TestConfiguration
 public class TestNatsConfig {
     @Primary
     @Bean
     public Connection natsTest(Environment env) {
-        return new MockNatsConnection();
+        return new InMemoryNatsConnection();
     }
 
     @Bean
-    public NotificationListenerTest<TestNotification> TestListener() {
-        return new NotificationListenerTest<TestNotification>();
+    public NotificationListenerTestHandler<TestNotification> TestListener() {
+        return new NotificationListenerTestHandler<TestNotification>();
     }
 }

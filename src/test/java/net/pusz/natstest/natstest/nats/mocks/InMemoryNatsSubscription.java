@@ -7,7 +7,7 @@ import io.nats.client.Dispatcher;
 import io.nats.client.Message;
 import io.nats.client.Subscription;
 
-public class MockNatsSubscription implements Subscription {
+public class InMemoryNatsSubscription implements Subscription {
 
     @Override
     public void setPendingLimits(long maxMessages, long maxBytes) {

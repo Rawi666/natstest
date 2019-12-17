@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MockNatsMessage implements Message {
+public class InMemoryNatsMessage implements Message {
     private String subject;
+    
     private byte[] data;
     private String replyTo;
     private Subscription subscription;

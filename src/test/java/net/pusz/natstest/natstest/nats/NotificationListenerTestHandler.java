@@ -2,13 +2,10 @@ package net.pusz.natstest.natstest.nats;
 
 import org.springframework.context.event.EventListener;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.Getter;
 
-@Data
-public class NotificationListenerTest<TNotification> {
-    @Setter(value = AccessLevel.PRIVATE)
+public class NotificationListenerTestHandler<TNotification>  {
+    @Getter
     private TNotification notification;
 
     @EventListener

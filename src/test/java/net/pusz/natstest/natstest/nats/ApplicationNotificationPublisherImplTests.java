@@ -3,22 +3,23 @@ package net.pusz.natstest.natstest.nats;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-@Component
-@SpringBootTest(classes = { TestNatsConfig.class })
+@SpringBootTest(classes = { TestNatsConfig.class }, webEnvironment = WebEnvironment.NONE)
 public class ApplicationNotificationPublisherImplTests {
     @Autowired
     private ApplicationNotificationPublisherImpl applicationNotificationPublisher;
 
     @Autowired
-    private NotificationListenerTest<TestNotification> notificationListener;
+    private NotificationListenerTestHandler<TestNotification> notificationListener;
 
     @Test
-    public void publishAndSubscribeTest() {
+    @DisplayName("Should Receive Notification")
+    public void shouldReceiveNotification() {
         var testMessage = "some message payload";
         var msg = TestNotification.builder().message(testMessage).build();
         this.applicationNotificationPublisher.publish(msg);

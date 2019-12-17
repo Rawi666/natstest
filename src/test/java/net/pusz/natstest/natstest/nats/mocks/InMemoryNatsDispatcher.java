@@ -8,11 +8,11 @@ import io.nats.client.Dispatcher;
 import io.nats.client.MessageHandler;
 import io.nats.client.Subscription;
 
-public class MockNatsDispatcher implements Dispatcher {
+public class InMemoryNatsDispatcher implements Dispatcher {
 
     private Dictionary<String, MessageHandler> handlers;
 
-    public MockNatsDispatcher(final Dictionary<String, MessageHandler> handlers) {
+    public InMemoryNatsDispatcher(final Dictionary<String, MessageHandler> handlers) {
         this.handlers = handlers;
     }
 
@@ -77,7 +77,7 @@ public class MockNatsDispatcher implements Dispatcher {
     @Override
     public Subscription subscribe(final String subject, final MessageHandler handler) {
         handlers.put(subject, handler);
-        return new MockNatsSubscription();
+        return new InMemoryNatsSubscription();
     }
 
     @Override

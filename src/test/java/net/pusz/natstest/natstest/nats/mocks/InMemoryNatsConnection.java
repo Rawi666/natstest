@@ -19,20 +19,17 @@ import lombok.SneakyThrows;
 /**
  * MockNatsConnection
  */
-public class MockNatsConnection implements Connection {
+public class InMemoryNatsConnection implements Connection {
     private final Hashtable<String, MessageHandler> handlers = new Hashtable<String, MessageHandler>();
 
     @Override
     @SneakyThrows
     public void publish(String subject, byte[] body) {
-        var msg = MockNatsMessage.builder().subject(subject).data(body).build();
+        var msg = InMemoryNatsMessage.builder().subject(subject).data(body).build();
 
         for (var key : handlers.keySet()) {
             var handler = handlers.get(key);
-            try {
-                handler.onMessage(msg);
-            } catch (Exception ex) {
-            }
+            handler.onMessage(msg);
         }
     }
 
@@ -62,7 +59,7 @@ public class MockNatsConnection implements Connection {
 
     @Override
     public Dispatcher createDispatcher(MessageHandler handler) {
-        var dispatcher = new MockNatsDispatcher(this.handlers);
+        var dispatcher = new InMemoryNatsDispatcher(this.handlers);
         return dispatcher;
     }
 
