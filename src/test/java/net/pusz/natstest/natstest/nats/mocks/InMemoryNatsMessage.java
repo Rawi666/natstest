@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InMemoryNatsMessage implements Message {
     private String subject;
-    
     private byte[] data;
     private String replyTo;
     private Subscription subscription;

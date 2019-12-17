@@ -8,7 +8,6 @@ import io.nats.client.Message;
 import io.nats.client.Subscription;
 
 public class InMemoryNatsSubscription implements Subscription {
-
     @Override
     public void setPendingLimits(long maxMessages, long maxBytes) {
     }

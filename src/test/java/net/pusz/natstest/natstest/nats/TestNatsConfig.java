@@ -17,7 +17,7 @@ public class TestNatsConfig {
     }
 
     @Bean
-    public NotificationListenerTestHandler<TestNotification> TestListener() {
-        return new NotificationListenerTestHandler<TestNotification>();
+    public NotificationListenerTestHandler TestListener() {
+        return new NotificationListenerTestHandler();
     }
 }

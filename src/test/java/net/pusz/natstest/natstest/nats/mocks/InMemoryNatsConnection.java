@@ -2,7 +2,6 @@ package net.pusz.natstest.natstest.nats.mocks;
 
 import java.time.Duration;
 import java.util.Collection;
-import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeoutException;
@@ -16,9 +15,6 @@ import io.nats.client.Statistics;
 import io.nats.client.Subscription;
 import lombok.SneakyThrows;
 
-/**
- * MockNatsConnection
- */
 public class InMemoryNatsConnection implements Connection {
     private final Hashtable<String, MessageHandler> handlers = new Hashtable<String, MessageHandler>();
 
