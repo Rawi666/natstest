@@ -14,19 +14,25 @@ import io.nats.client.MessageHandler;
 import io.nats.client.Options;
 import io.nats.client.Statistics;
 import io.nats.client.Subscription;
+import lombok.SneakyThrows;
 
 /**
  * MockNatsConnection
  */
 public class MockNatsConnection implements Connection {
-    private final Dictionary<String, MessageHandler> handlers = new Hashtable<String, MessageHandler>();
+    private final Hashtable<String, MessageHandler> handlers = new Hashtable<String, MessageHandler>();
 
     @Override
+    @SneakyThrows
     public void publish(String subject, byte[] body) {
-        var handler = this.handlers.get(subject);
+        var msg = MockNatsMessage.builder().subject(subject).data(body).build();
 
-        if (handler != null) {
-            var message = MockNatsMessage.builder().data(body);
+        for (var key : handlers.keySet()) {
+            var handler = handlers.get(key);
+            try {
+                handler.onMessage(msg);
+            } catch (Exception ex) {
+            }
         }
     }
 
