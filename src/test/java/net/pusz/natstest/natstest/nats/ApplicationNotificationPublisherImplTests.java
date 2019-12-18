@@ -1,23 +1,23 @@
 package net.pusz.natstest.natstest.nats;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.time.Duration;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest(classes = { TestNatsConfig.class }, webEnvironment = WebEnvironment.NONE)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { TestNatsConfig.class })
 public class ApplicationNotificationPublisherImplTests {
     @Autowired
-    private ApplicationNotificationPublisherImpl applicationNotificationPublisher;
+    private ApplicationNotificationPublisher applicationNotificationPublisher;
 
     @Autowired
-    private NotificationListenerTestHandler notificationListener;
+    private NotificationListenerTestAdapter notificationListener;
 
     @Test
     @DisplayName("Should Receive Notification")
@@ -27,7 +27,7 @@ public class ApplicationNotificationPublisherImplTests {
 
         this.applicationNotificationPublisher.publish(msg);
         var actual = notificationListener.getEvents().blockFirst(Duration.ofSeconds(1));
-        assertNotNull(actual);
-        assertEquals(expectedMessage, actual.getMessage());
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(expectedMessage, actual.getMessage());
     }
 }

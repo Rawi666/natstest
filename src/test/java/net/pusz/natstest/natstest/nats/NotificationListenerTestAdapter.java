@@ -4,7 +4,7 @@ import org.springframework.context.event.EventListener;
 
 import reactor.core.publisher.ReplayProcessor;
 
-public class NotificationListenerTestHandler {
+public class NotificationListenerTestAdapter {
     private ReplayProcessor<TestNotification> events = ReplayProcessor.create();
 
     public ReplayProcessor<TestNotification> getEvents() {
